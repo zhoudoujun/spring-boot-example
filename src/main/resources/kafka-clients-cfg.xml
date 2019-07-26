@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kafka-clients>
+	<!-- 生产者 -->
+	<producer>
+		<!-- 唯一ID -->
+		<id>KAFKA_CLIENTS_CFG_SPRING_BOOT_EXAMPLE</id>
+		<topic>KAFKA_CLIENTS_CFG_SPRING_BOOT_EXAMPLE</topic>
+		<!-- kafka的链接url（不是zookeeper） -->
+		<kafka.broker.list>47.110.47.104:9092</kafka.broker.list>
+		<!-- 处理类，继承AbstractProducerHandler，可以不写，不写的话使用DefaultProducerHandler -->
+		<handler.class></handler.class>
+		<request.required.acks>1</request.required.acks>
+		<!-- 生产者池预创建数量,可以不用填写,默认数量为cpu核数*2 -->
+		<!-- <producer.pool.size></producer.pool.size> -->
+		<!-- 执行管理类的配置，默认为线程池管理，通常不需要配置 -->
+		<executor.service.class></executor.service.class>
+		<send.async.enable>true</send.async.enable>
+	</producer>
+	
+	<!-- 消息监听 -->
+    <consumer>
+        <!-- 唯一ID -->
+        <id>KAFKA_CLIENTS_CFG_SPRING_BOOT_EXAMPLE</id>
+        <!-- 消费的topic -->
+        <topic>KAFKA_CLIENTS_CFG_SPRING_BOOT_EXAMPLE</topic>
+        <!-- comsumer的处理类，继承抽象类AbstractConsumerHandler -->
+        <handler.class>com.adou.example.utils.kafka.consumer.ExampleAsyncConsumer</handler.class>
+        <!-- 消费者的groupId，为kafka consumer group -->
+        <!-- 同一个groupID为queue模式，不同的groupID为publish-subscribe模式 -->
+         <group.id>KAFKA_CLIENTS_CFG_SPRING_BOOT_EXAMPLE1</group.id>
+        <!-- zookeeper集群的链接 -->
+        <zookeeper.connect>47.110.47.104:2181</zookeeper.connect>
+        <!-- 自动Commit，默认true -->
+        <auto.commit.enable>true</auto.commit.enable>
+        <!-- 自动Commit间隔时间，默认60 * 1000毫秒 -->
+        <auto.commit.interval.ms>1000</auto.commit.interval.ms>
+        <!-- largest 从当前最大值开始接受，smallest从0开始接受 -->
+        <auto.offset.reset>largest</auto.offset.reset>
+    </consumer>
+	
+</kafka-clients>
